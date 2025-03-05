@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
+
 const PasswordInput = ({ value, onChange, placeholder }) => {
     const [showPassword, setShowPassword] = useState(false);
     const togglePassword = () => {

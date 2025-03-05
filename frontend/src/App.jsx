@@ -9,6 +9,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-50">
         <Navbar />
+       
         <Routes>
           <Route path="/dashboard" element={<Home />} />
           <Route path="/login" element={<Login />} />

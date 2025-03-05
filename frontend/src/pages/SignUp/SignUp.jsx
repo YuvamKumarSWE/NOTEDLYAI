@@ -48,7 +48,7 @@ const SignUp = () => {
                     type="text" 
                     placeholder="Name" 
                     className="input-box" 
-                    value={email}
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
 

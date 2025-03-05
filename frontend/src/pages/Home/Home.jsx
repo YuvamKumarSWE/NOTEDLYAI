@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import Navbar from "../../components/Navbar";
 
 const Home = () => {
+
+    useEffect(() => {   
+        document.title = "Home - NotedlyAI"
+    }, [])
+
     return (
         <div>
-            <h1>Home</h1>
+            
         </div>
     )
 }   
