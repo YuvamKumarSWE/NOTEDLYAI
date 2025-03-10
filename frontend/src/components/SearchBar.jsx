@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { FaSearch } from "react-icons/fa";
+import {IoMdClose} from "react-icons/io";
 
 const SearchBar = ({value , onChange, handleSearch, onClearSearch}) => {
 
@@ -14,7 +14,11 @@ const SearchBar = ({value , onChange, handleSearch, onClearSearch}) => {
                 onChange={onChange}
                 value={value}
             />
-            <button className=" ml-4 mr-4 text-slate-400 cursor-pointer " ><FaSearch /></button>
+
+            {value && (
+                <IoMdClose className="pt-3 text-[34px] ml-2 mr-2 text-slate-400 cursor-pointer hover:text-black" onClick={onClearSearch} />
+            )}
+            <FaSearch className="pt-4 text-[30px] mr-2 text-slate-400 cursor-pointer hover:text-black" onClick={handleSearch} />
         </div>
     );
 };
