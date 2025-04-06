@@ -1,26 +1,32 @@
 import { FaSearch } from "react-icons/fa";
-import {IoMdClose} from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
 
-const SearchBar = ({value , onChange, handleSearch, onClearSearch}) => {
-
-    
-
-    return (
-        <div className=" sm:min-w-sm min-w-4xs flex-shrink mt-4 mb-4  flex text-m border-slate-300 border-1 rounded-lg max-h-5/6 ml-2 mr-2">
-            <input
-                type="text"
-                className="w-full placeholder-gray-400 text-gray-900 p-4"
-                placeholder="Search Notes ..."
-                onChange={onChange}
-                value={value}
+const SearchBar = ({ value, onChange, handleSearch, onClearSearch }) => {
+  return (
+    <div className="relative w-full max-w-md mx-auto">
+      <div className="flex items-center relative">
+        <input
+          type="text"
+          className="w-full px-4 py-2 pr-16 text-gray-700 bg-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Search Notes..."
+          onChange={onChange}
+          value={value}
+        />
+        <div className="absolute right-0 flex items-center pr-3">
+          {value && (
+            <IoMdClose 
+              className="text-gray-400 hover:text-blue-500 cursor-pointer mr-2 text-xl" 
+              onClick={onClearSearch} 
             />
-
-            {value && (
-                <IoMdClose className="pt-3 text-[34px] ml-2 mr-2 text-slate-400 cursor-pointer hover:text-black" onClick={onClearSearch} />
-            )}
-            <FaSearch className="pt-4 text-[30px] mr-2 text-slate-400 cursor-pointer hover:text-black" onClick={handleSearch} />
+          )}
+          <FaSearch 
+            className="text-gray-400 hover:text-blue-500 cursor-pointer text-lg" 
+            onClick={handleSearch} 
+          />
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default SearchBar;

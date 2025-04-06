@@ -15,12 +15,12 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="bg-white shadow-md mb-6">
+        <nav className="bg-[#2b093675] shadow-md mb-6">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex-shrink-0 flex items-center gap-2">
-                        <TfiWrite className="text-2xl text-slate-400" />
-                        <Link to="/dashboard" className="text-xl font-bold text-gray-800"> NotedlyAI </Link>
+                        <TfiWrite className="text-2xl text-slate-200" />
+                        <Link to="/dashboard" className="text-xl font-bold text-white"> NotedlyAI </Link>
                     </div>
 
                     <SearchBar
