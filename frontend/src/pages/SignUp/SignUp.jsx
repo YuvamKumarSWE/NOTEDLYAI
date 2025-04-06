@@ -12,24 +12,10 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (!name) {
-            setError("Name is required");
-            return;
-        }
-
-        if (!validator.isEmail(email)) {
-            setError("Invalid Email");
-            return;
-        }
-        if (password.length < 6) {
-            setError("Password must be at least 6 characters");
-            return;
-        }
-        if (password !== confirmPassword) {
-            setError("Passwords do not match");
-            return;
-        }
+        if (!name) {setError("Name is required"); return;}
+        if (!validator.isEmail(email)) {setError("Invalid Email"); return;}
+        if (password.length < 6) {setError("Password must be at least 6 characters"); return;}
+        if (password !== confirmPassword) {setError("Passwords do not match"); return;}
         //API call FOR FUTURE
         console.log("SignUp");
     }
@@ -44,31 +30,19 @@ const SignUp = () => {
             <form onSubmit={handleSubmit}>
                 <h3 className="text-2xl mb-7">Sign Up</h3>
 
-                <input 
-                    type="text" 
-                    placeholder="Name" 
-                    className="input-box" 
-                    value={name}
+                <input type="text" placeholder="Name" className="input-box" value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
 
-                <input 
-                    type="text" 
-                    placeholder="Email" 
-                    className="input-box" 
-                    value={email}
+                <input type="text" placeholder="Email" className="input-box" value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
 
-                <PasswordInput 
-                    placeholder="Password" 
-                    value={password} 
+                <PasswordInput placeholder="Password" value={password} 
                     onChange={(e) => setPassword(e.target.value)} 
                 />
 
-                <PasswordInput 
-                    placeholder="Confirm Password" 
-                    value={confirmPassword} 
+                <PasswordInput placeholder="Confirm Password" value={confirmPassword} 
                     onChange={(e) => setConfirmPassword(e.target.value)} 
                 />
                 
