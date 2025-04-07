@@ -1,8 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import NoteCard from "../../components/NoteCard";
+import NewNote from "./NewNote";
 import { FaPlus } from "react-icons/fa";
+import Modal from "react-modal";
 
 const Home = () => {
+
+    const [openModal, setOpenModel] = useState({
+        isShown: false,
+        type: "add",
+        data: null,
+    });
 
     useEffect(() => {   
         document.title = "Home - NotedlyAI"
@@ -81,10 +89,29 @@ const Home = () => {
 
         <button 
             className="fixed bottom-8 right-8 bg-black text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition-all ease-in-out"
-            onClick={() => console.log('Add new note')}
+            onClick={() => {
+                setOpenModel({ isShown: true, type: "add", data: null });
+            }}
         >
             <FaPlus className="text-xl" />
         </button>
+
+        <Modal  
+            isOpen={openModal.isShown}
+            onRequestClose={() => setOpenModel({ isShown: false, type: "add", data: null })}   
+            style={{
+                overlay: {
+                    backgroundColor: "rgba(0, 0, 0, 0.2)",
+                },
+            }}
+            contentLabel=""
+            className="w-[90%]  bg-[#0e0323] rounded-2xl p-5 mt-20 mx-auto pt-7 pb-7"
+        >
+            <NewNote />
+
+        </Modal>
+
+    
         </>
     )
 }   
