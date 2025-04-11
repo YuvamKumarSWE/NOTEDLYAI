@@ -28,57 +28,6 @@ const Home = () => {
                         for many years. She loves to garden and do genealogy. Informant: Elvina Hansen is the proud mother of two, one girl and one boy. She is also a
                         grandmother of eight, and the great grandmother of four. She is 81 years old and has been retired
                         for many years. She loves to garden and do genealogy.  "
-                    tags="tag1"
-                    isPinned={true}
-                    onEdit={() => {}}
-                    onDelete={() => {}}
-                    onPinNote={() => {}}
-                />
-                <NoteCard 
-                    title="Note 1"
-                    date="2023-01-01"
-                    content="This is a note"
-                    tags="tag1"
-                    isPinned={true}
-                    onEdit={() => {}}
-                    onDelete={() => {}}
-                    onPinNote={() => {}}
-                />
-                <NoteCard 
-                    title="Note 1"
-                    date="2023-01-01"
-                    content="This is a note"
-                    tags="tag1"
-                    isPinned={true}
-                    onEdit={() => {}}
-                    onDelete={() => {}}
-                    onPinNote={() => {}}
-                />
-                <NoteCard 
-                    title="Note 1"
-                    date="2023-01-01"
-                    content="This is a note"
-                    tags="tag1"
-                    isPinned={true}
-                    onEdit={() => {}}
-                    onDelete={() => {}}
-                    onPinNote={() => {}}
-                />
-                <NoteCard 
-                    title="Note 1"
-                    date="2023-01-01"
-                    content="This is a note"
-                    tags="tag1"
-                    isPinned={true}
-                    onEdit={() => {}}
-                    onDelete={() => {}}
-                    onPinNote={() => {}}
-                />
-                <NoteCard 
-                    title="Note 1"
-                    date="2023-01-01"
-                    content="This is a note"
-                    tags="tag1"
                     isPinned={true}
                     onEdit={() => {}}
                     onDelete={() => {}}
@@ -105,7 +54,7 @@ const Home = () => {
                 },
             }}
             contentLabel=""
-            className="w-[90%]  bg-[#0e0323] rounded-2xl p-5 mt-20 mx-auto pt-7 pb-7"
+            className="w-[90%]  bg-[#0e0323] rounded-2xl p-5 mt-20 mx-auto pt-7 pb-7 overflow-scroll"
         >
             <NewNote />
 

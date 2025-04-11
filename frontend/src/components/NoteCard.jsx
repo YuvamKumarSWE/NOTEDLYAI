@@ -5,7 +5,6 @@ const NoteCard = ({
   title,
   date,
   content,
-  tags,
   isPinned,
   onEdit,
   onDelete,
@@ -36,25 +35,6 @@ const NoteCard = ({
       
       {/* Footer */}
       <div>
-        <div className="flex justify-between items-center pt-3 border-t border-slate-100">
-          {/* Tags */}
-          <div className="text-xs text-slate-500 flex-1 flex items-center flex-wrap">
-            {tags && Array.isArray(tags) 
-              ? tags.map((tag, index) => (
-                  <span key={index} className="inline-block bg-slate-100 rounded-full px-2.5 py-1 mr-2 mb-1">
-                    #{tag}
-                  </span>
-                ))
-              : tags && (
-                  <span className="inline-block bg-slate-100 rounded-full px-2.5 py-1">
-                    #{tags}
-                  </span>
-                )
-            }
-          </div>
-
-          {/* Vertical Divider */}
-          <div className="h-8 border-l border-slate-200 mx-3"></div>
           
           {/* Actions */}
           <div className="flex items-center gap-3">
@@ -73,7 +53,7 @@ const NoteCard = ({
           </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 

@@ -1,3 +1,6 @@
+
+
+
 const NewNote = () => {
     return (
         <div >
@@ -8,11 +11,7 @@ const NewNote = () => {
 
             <div className="flex flex-col gap-2 mt-5" >
                 <label className="input-label">Content</label>
-                <textarea type="text" className="text-md text-slate-900 outline-none bg-[#eae8efed] p-2 rounded-xl" placeholder="idk" rows={22} />
-            </div>
-
-            <div className="mt-5">
-                <label className="input-label">Tags</label>
+                <textarea type="text" className="text-md text-slate-900 outline-none bg-[#eae8efed] p-2 rounded-xl" placeholder="idk" rows={20} />
             </div>
 
             <button className="btn-primary bg-[#800ce662] text-xl mt-5 p-2 cursor-pointer hover:text-blue-400" onClick={()=>{}}>
