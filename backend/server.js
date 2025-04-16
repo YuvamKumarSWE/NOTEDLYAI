@@ -8,9 +8,6 @@ mongoose.connect(process.env.MONGODB_URI, {})
 .then(() => {console.log("MongoDB Connected")})
 .catch((err) => {console.error(err)});
 
-app.get('/', (req, res) => {
-    res.status(200).json({ message: 'Hello, world!' });
-});
 
 app.listen(process.env.PORT, () => {
     console.log("Server running on port: " + process.env.PORT);
