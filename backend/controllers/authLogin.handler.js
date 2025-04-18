@@ -9,26 +9,24 @@ exports.login = async (req, res) => {
         }
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'User not found' });
         }
         const isMatch = await user.comparePassword(password);
         if (!isMatch) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
+
         const accessToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: '1d'
         });
         return res.json({
-            success: true,
-            user: {
-                _id: user._id,
-                fullName: user.fullName,
-                email: user.email
-            },
+            error: false,
+            message: 'Login successful',
+            email,
             accessToken
         });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Server error" });
+        return res.status(500).json({error: true, message: "Server error" });
     }
 };

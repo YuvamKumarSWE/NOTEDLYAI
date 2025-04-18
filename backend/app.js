@@ -5,6 +5,7 @@ const app = express();
 
 const authCreateRoute = require("./routes/authCreate");
 const authLoginRoute = require("./routes/authLogin");
+const addNoteRoute = require("./routes/addNote");
 
 app.use(cors());
 app.use(express.json());
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 
 app.use(authCreateRoute);
 app.use(authLoginRoute);
+app.use(addNoteRoute);
 
 
 module.exports = app;
