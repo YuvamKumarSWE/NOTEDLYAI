@@ -17,6 +17,11 @@ app.get('/', (req, res) => {                              // Test Api endpoint
     res.status(200).json({ message: 'while(!(succeed = try()));' });
 });
 
+app.use((req, res, next) => {
+    console.log('Time:', Date.now())
+    next()
+  })
+
 app.use(authCreateRoute);
 app.use(authLoginRoute);
 app.use(addNoteRoute);
