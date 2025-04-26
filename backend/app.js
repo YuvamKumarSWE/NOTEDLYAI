@@ -8,6 +8,8 @@ const authLoginRoute = require("./routes/authLogin");
 const addNoteRoute = require("./routes/addNote");
 const editNoteRoute = require("./routes/editNote");
 const getAllNotesRoute = require("./routes/getAllNotes");
+const deleteNote = require("./routes/deleteNote");
+const pinNote = require("./routes/pinNote")
 
 app.use(cors());
 app.use(express.json());
@@ -27,6 +29,8 @@ app.use(authLoginRoute);
 app.use(addNoteRoute);
 app.use(editNoteRoute);
 app.use(getAllNotesRoute);
+app.use(deleteNote);
+app.listen(pinNote);
 
 
 module.exports = app;
