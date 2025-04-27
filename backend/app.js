@@ -2,6 +2,9 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev"));
 
 const authCreateRoute = require("./routes/authCreate");
 const authLoginRoute = require("./routes/authLogin");
@@ -11,9 +14,7 @@ const getAllNotesRoute = require("./routes/getAllNotes");
 const deleteNote = require("./routes/deleteNote");
 const pinNote = require("./routes/pinNote")
 
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
+
 
 app.get('/', (req, res) => {                              // Test Api endpoint
     res.status(200).json({ message: 'while(!(succeed = try()));' });
@@ -30,7 +31,7 @@ app.use(addNoteRoute);
 app.use(editNoteRoute);
 app.use(getAllNotesRoute);
 app.use(deleteNote);
-app.listen(pinNote);
+app.use(pinNote);
 
 
 module.exports = app;
