@@ -22,7 +22,7 @@ exports.addNote = async (req, res) => {
         const note = new Note({
             title,
             content,
-            userID: user.id // Use user.id directly from the decoded token payload
+            userID: user.id 
         });
 
         await note.save();

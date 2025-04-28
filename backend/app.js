@@ -13,7 +13,7 @@ const editNoteRoute = require("./routes/editNote");
 const getAllNotesRoute = require("./routes/getAllNotes");
 const deleteNote = require("./routes/deleteNote");
 const pinNote = require("./routes/pinNote")
-
+const getUser = require("./routes/getUser");
 
 
 app.get('/', (req, res) => {                              // Test Api endpoint
@@ -32,6 +32,7 @@ app.use(editNoteRoute);
 app.use(getAllNotesRoute);
 app.use(deleteNote);
 app.use(pinNote);
+app.use(getUser);
 
 
 module.exports = app;
