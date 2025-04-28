@@ -15,7 +15,12 @@ router.get("/get-user", auth, async (req, res) => {
 
         return res.status(200).json({
             message: "User found",
-            user: isUser,
+            user: {
+                id: isUser._id,
+                name: isUser.fullName,
+                email: isUser.email,
+                createdOn: isUser.createdOn,
+            },
         });
     } catch (error) {
         console.error(error);
