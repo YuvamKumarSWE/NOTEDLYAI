@@ -14,7 +14,11 @@ exports.pinNote = async(req , res) => {
             res.status(500).json({error: true, message: "Note not found! Boi which shouldn't happen LOL"});
         }
 
-        if(isPinned) note.isPinned = isPinned;
+        if(note.isPinned === true){
+            note.isPinned = false;
+        } else{
+            note.isPinned = true;
+        }
 
         await note.save();
 
