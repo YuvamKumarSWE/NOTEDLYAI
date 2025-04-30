@@ -2,16 +2,18 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Profile from './Profile'; 
 import { TfiWrite } from "react-icons/tfi";
-import SearchBar from './SearchBar';
+import { toast } from 'react-toastify';
+
 
 const Navbar = ({ userInfo }) => {
 
-    const [searchQuery, setSearchQuery] = useState("");
+    
 
     const navigate = useNavigate();
 
     const onLogout = () => {
         localStorage.clear();
+        toast.success("Logout successful!");
         navigate("/login");
     }
 
@@ -24,12 +26,7 @@ const Navbar = ({ userInfo }) => {
                         <Link to="/dashboard" className="text-xl font-bold text-white"> NotedlyAI </Link>
                     </div>
 
-                    <SearchBar
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        handleSearch={() => console.log(searchQuery)}
-                        onClearSearch={() => setSearchQuery("")}
-                    />
+                    
 
                     <div className="flex space-x-8">
                       <Profile userInfo={userInfo} onLogout={onLogout} />
