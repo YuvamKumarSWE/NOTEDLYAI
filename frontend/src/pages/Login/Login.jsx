@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "../../components/PasswordInput";
 import validator from "validator";
 import axiosInstance from "../../utils/axiosInstance";
+import { toast } from 'react-toastify';
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -32,6 +34,7 @@ const Login = () => {
             });
             if(response.data && response.data.accessToken) {
                 localStorage.setItem("token", response.data.accessToken);
+                toast.success("Login successful! Redirecting to dashboard...");
                 navigate("/dashboard");
             }
         } catch (error) {
@@ -40,6 +43,7 @@ const Login = () => {
             } else {
                 setError("An error occurred. Please try again later.");
             }
+            toast.error("An error occurred. Please try again later.");
         } finally {
             setIsLoading(false);
         }
