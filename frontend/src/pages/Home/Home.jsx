@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import NoteCard from "../../components/NoteCard";
-import NewNote from "./NewNote";
 import { FaPlus } from "react-icons/fa";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,7 @@ import { toast } from 'react-toastify';
 const Home = () => {
     const [openModal, setOpenModel] = useState({
         isShown: false,
-        type: "add", // "add" or "edit"
+        type: "add", 
         data: null,
     });
 
@@ -56,15 +55,15 @@ const Home = () => {
     // ADD NOTE
     const handleAddNote = async () => {
         setFormError("");
-        if (!noteForm.title || !noteForm.content) {
-            setFormError("Title and content are required.");
+        if (!noteForm.title) {
+            setFormError("Title is required.");
             return;
         }
         setFormLoading(true);
         try {
             await axiosInstance.post("/add-note", {
                 title: noteForm.title,
-                content: noteForm.content,
+                content: "Click edit to add content to your note...", // Default placeholder content
             });
             setOpenModel({ isShown: false, type: "add", data: null });
             setNoteForm({ title: "", content: "" });
@@ -78,30 +77,7 @@ const Home = () => {
         }
     };
 
-    // EDIT NOTE
-    const handleEditNote = async () => {
-        setFormError("");
-        if (!noteForm.title || !noteForm.content) {
-            setFormError("Title and content are required.");
-            return;
-        }
-        setFormLoading(true);
-        try {
-            await axiosInstance.put(`/edit-note/${openModal.data._id}`, {
-                title: noteForm.title,
-                content: noteForm.content,
-            });
-            setOpenModel({ isShown: false, type: "add", data: null });
-            setNoteForm({ title: "", content: "" });
-            toast.success("Note updated successfully!");
-            getAllNotes();
-        } catch (error) {
-            setFormError("Failed to edit note."+ error.message);
-            toast.error("Failed to edit note.");
-        } finally {
-            setFormLoading(false);
-        }
-    };
+   
 
     // DELETE NOTE
     const handleDeleteNote = async (noteId) => {
@@ -121,18 +97,17 @@ const Home = () => {
         try {
             await axiosInstance.put(`/pin-note/${noteId}`);
             getAllNotes();
+            toast.success(noteId.isPinned ? "Note unpinned successfully!" : "Note pinned successfully!");
+            
         } catch (error) {
             alert("Failed to pin note." + error.message);
         }
     };
 
-    // OPEN MODAL FOR EDIT
     const openEditModal = (note) => {
-        setNoteForm({ title: note.title, content: note.content });
-        setOpenModel({ isShown: true, type: "edit", data: note });
+        navigate(`/edit/${note._id}`);
     };
 
-    // OPEN MODAL FOR ADD
     const openAddModal = () => {
         setNoteForm({ title: "", content: "" });
         setOpenModel({ isShown: true, type: "add", data: null });
@@ -141,6 +116,7 @@ const Home = () => {
     useEffect(() => {
         getUserInfo();
         getAllNotes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {   
@@ -190,39 +166,27 @@ const Home = () => {
                     backgroundColor: "rgba(0, 0, 0, 0.2)",
                 },
             }}
-            contentLabel=""
-            className="w-[90%]  bg-[#0e0323] rounded-2xl p-5 mt-20 mx-auto pt-7 pb-7 overflow-scroll"
+            contentLabel="Add New Note"
+            className="w-[90%] bg-[#0e0323] rounded-2xl p-5 mt-20 mx-auto pt-7 pb-7 overflow-scroll"
         >
             <div>
                 <div className="flex flex-col gap-2">
                     <label className="input-label">Title</label>
                     <input
                         type="text"
-                        className="text-2xl text-slate-300 outline-none"
+                        className="text-2xl text-slate-300 outline-none bg-[#1f1234] p-3 rounded-lg"
                         placeholder="Title"
                         value={noteForm.title}
                         onChange={e => setNoteForm({ ...noteForm, title: e.target.value })}
                     />
                 </div>
-                <div className="flex flex-col gap-2 mt-5">
-                    <label className="input-label">Content</label>
-                    <textarea
-                        className="text-md text-slate-900 outline-none bg-[#eae8efed] p-2 rounded-xl"
-                        placeholder="Content"
-                        rows={10}
-                        value={noteForm.content}
-                        onChange={e => setNoteForm({ ...noteForm, content: e.target.value })}
-                    />
-                </div>
                 {formError && <p className="text-red-500 text-sm mt-2">{formError}</p>}
                 <button
                     className="btn-primary bg-[#800ce662] text-xl mt-5 p-2 cursor-pointer hover:text-blue-400"
-                    onClick={openModal.type === "add" ? handleAddNote : handleEditNote}
+                    onClick={handleAddNote}
                     disabled={formLoading}
                 >
-                    {formLoading
-                        ? (openModal.type === "add" ? "Adding..." : "Saving...")
-                        : (openModal.type === "add" ? "ADD ➕" : "Save Changes")}
+                    {formLoading ? "Adding..." : "Create Note"}
                 </button>
             </div>
         </Modal>

@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
+import EditNote from './pages/EditNote/EditNote'; // Add this import
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LandingPage from './pages/Landing/LandingPage';
@@ -16,6 +17,7 @@ function App() {
             <Route path="/dashboard" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/edit/:noteId" element={<EditNote />} /> {/* Add this route */}
           </Routes>
         </div>
         <ToastContainer
