@@ -68,9 +68,11 @@ const Home = () => {
             });
             setOpenModel({ isShown: false, type: "add", data: null });
             setNoteForm({ title: "", content: "" });
+            toast.success("Note added successfully!");
             getAllNotes();
         } catch (error) {
             setFormError("Failed to add note." + error.message);
+            toast.error("Failed to add note.");
         } finally {
             setFormLoading(false);
         }
@@ -95,6 +97,7 @@ const Home = () => {
             getAllNotes();
         } catch (error) {
             setFormError("Failed to edit note."+ error.message);
+            toast.error("Failed to edit note.");
         } finally {
             setFormLoading(false);
         }
@@ -105,9 +108,11 @@ const Home = () => {
         if (!window.confirm("Delete this note?")) return;
         try {
             await axiosInstance.delete(`/delete-note/${noteId}`);
+            toast.success("Note deleted successfully!");
             getAllNotes();
         } catch (error) {
             alert("Failed to delete note." + error.message);
+            toast.error("Failed to delete note.");
         }
     };
 
