@@ -5,7 +5,6 @@ import validator from "validator";
 import axiosInstance from "../../utils/axiosInstance";
 import { toast } from 'react-toastify';
 
-
 const SignUp = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -52,39 +51,68 @@ const SignUp = () => {
     }, [])
    
     return (
-        <div className="flex justify-center items-center h-screen bg-[#1a0223d5]">
-           <div className="w-96 p-6 bg-white rounded-lg shadow-xl">
-            <form onSubmit={handleSubmit}>
-                <h3 className="text-2xl mb-7">Sign Up</h3>
+        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-[#1a0223]">
+            <div className="w-full max-w-md p-8 m-4 bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-2xl border border-gray-700/50">
+                <form onSubmit={handleSubmit}>
+                    <h3 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
+                        Create Account
+                    </h3>
 
-                <input type="text" placeholder="Name" className="input-box" value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
+                    <div className="mb-4">
+                        <input type="text" 
+                            placeholder="Full Name" 
+                            className="w-full p-3 rounded-lg bg-gray-800/60 border border-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50" 
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
 
-                <input type="text" placeholder="Email" className="input-box" value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
+                    <div className="mb-4">
+                        <input type="email" 
+                            placeholder="Email Address" 
+                            className="w-full p-3 rounded-lg bg-gray-800/60 border border-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50" 
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    
 
-                <PasswordInput placeholder="Password" value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                />
+                    <div className="mb-4">
+                        <PasswordInput 
+                            placeholder="Password" 
+                            value={password} 
+                            className="w-full p-3 rounded-lg bg-gray-800/60 border border-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                            onChange={(e) => setPassword(e.target.value)} 
+                        />
+                    </div>
 
-                <PasswordInput placeholder="Confirm Password" value={confirmPassword} 
-                    onChange={(e) => setConfirmPassword(e.target.value)} 
-                />
-                
-                {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+                    <div className="mb-6">
+                        <PasswordInput 
+                            placeholder="Confirm Password" 
+                            value={confirmPassword} 
+                            className="w-full p-3 rounded-lg bg-gray-800/60 border border-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                            onChange={(e) => setConfirmPassword(e.target.value)} 
+                        />
+                    </div>
+                    
+                    {error && <p className="text-red-400 text-sm mb-4">{error}</p>}
 
-                <button type="submit" className="btn-primary" disabled={isLoading}>
-                    {isLoading ? "Signing up..." : "Sign Up"}
-                </button>
+                    <button 
+                        type="submit" 
+                        className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium hover:opacity-90 shadow-lg shadow-purple-500/20 transition-all disabled:opacity-70"
+                        disabled={isLoading}
+                    >
+                        {isLoading ? "Creating Account..." : "Sign Up"}
+                    </button>
 
-                <p className="text-sm text-center mt-4"> 
-                    Already have an account?{" "} 
-                    <Link to="/login" className="text-blue-500 font-medium underline">Login</Link>
-                </p>
-            </form>
-           </div>
+                    <p className="text-gray-300 text-center mt-6"> 
+                        Already have an account?{" "} 
+                        <Link to="/login" className="text-purple-400 font-medium hover:text-pink-400 transition-colors">
+                            Log In
+                        </Link>
+                    </p>
+                </form>
+            </div>
         </div>
     )
 }   
