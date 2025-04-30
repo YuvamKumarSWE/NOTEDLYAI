@@ -4,13 +4,14 @@ import Profile from './Profile';
 import { TfiWrite } from "react-icons/tfi";
 import SearchBar from './SearchBar';
 
-const Navbar = () => {
+const Navbar = ({ userInfo }) => {
 
     const [searchQuery, setSearchQuery] = useState("");
 
     const navigate = useNavigate();
 
     const onLogout = () => {
+        localStorage.clear();
         navigate("/login");
     }
 
@@ -31,7 +32,7 @@ const Navbar = () => {
                     />
 
                     <div className="flex space-x-8">
-                      <Profile onLogout={onLogout} />
+                      <Profile userInfo={userInfo} onLogout={onLogout} />
                     </div>
                 </div>
             </div>
