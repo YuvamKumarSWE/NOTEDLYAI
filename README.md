@@ -34,7 +34,3 @@ NotedlyAI is a full-stack web application that transforms the way you take, orga
 ## 🖥️ Screenshots
 
 
-
----
-
-## 🚦 How It Works
