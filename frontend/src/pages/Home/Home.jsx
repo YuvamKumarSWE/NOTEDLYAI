@@ -152,7 +152,7 @@ const Home = () => {
         </div>
 
         <button 
-            className="fixed bottom-8 right-8 bg-black text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition-all ease-in-out"
+            className="fixed bottom-8 right-8 bg-gradient-to-r from-pink-500 to-purple-600 text-white p-4 rounded-full shadow-lg hover:opacity-90 transition-all"
             onClick={openAddModal}
         >
             <FaPlus className="text-xl" />
@@ -163,26 +163,26 @@ const Home = () => {
             onRequestClose={() => setOpenModel({ isShown: false, type: "add", data: null })}   
             style={{
                 overlay: {
-                    backgroundColor: "rgba(0, 0, 0, 0.2)",
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
                 },
             }}
             contentLabel="Add New Note"
-            className="w-[90%] bg-[#0e0323] rounded-2xl p-5 mt-20 mx-auto pt-7 pb-7 overflow-scroll"
+            className="w-[90%] bg-gray-900/80 backdrop-blur-sm rounded-xl p-5 mt-20 mx-auto pt-7 pb-7 overflow-scroll border border-gray-700/50 shadow-2xl"
         >
             <div>
                 <div className="flex flex-col gap-2">
-                    <label className="input-label">Title</label>
+                    <label className="input-label text-white">Title</label>
                     <input
                         type="text"
-                        className="text-2xl text-slate-300 outline-none bg-[#1f1234] p-3 rounded-lg"
+                        className="w-full p-3 rounded-lg bg-gray-800/60 border border-gray-700/50 text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                         placeholder="Title"
                         value={noteForm.title}
                         onChange={e => setNoteForm({ ...noteForm, title: e.target.value })}
                     />
                 </div>
-                {formError && <p className="text-red-500 text-sm mt-2">{formError}</p>}
+                {formError && <p className="text-red-400 text-sm mt-2">{formError}</p>}
                 <button
-                    className="btn-primary bg-[#800ce662] text-xl mt-5 p-2 cursor-pointer hover:text-blue-400"
+                    className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium hover:opacity-90 shadow-lg shadow-purple-500/20 transition-all disabled:opacity-70 mt-5"
                     onClick={handleAddNote}
                     disabled={formLoading}
                 >

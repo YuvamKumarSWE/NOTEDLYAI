@@ -23,6 +23,7 @@
     "react-initials-avatar": "^1.1.2",
     "react-modal": "^3.16.3",
     "react-router-dom": "^7.2.0",
+    "react-textarea-autosize": "^8.5.9",
     "react-toastify": "^11.0.5",
     "tailwind-merge": "^3.2.0",
     "validator": "^13.12.0"

@@ -12,9 +12,9 @@ const Profile = ({userInfo, onLogout}) => {
     <>
         <div className='flex items-center gap-4'>
             <InitialsAvatar name={userInfo.name || ''} />
-            <div className='flex flex-col items-center gap-1'>
+            <div className='flex  items-center gap-4'>
                 <p className='text-md text-white font-medium'>{userInfo.name}</p>
-                <button className='text-sm text-white cursor-pointer' onClick={onLogout}><GrLogout/></button>
+                <button className='text-lg text-white cursor-pointer hover:text-xl hover:text-red-600 ' onClick={onLogout}><GrLogout/></button>
             </div>
         </div>
     </>

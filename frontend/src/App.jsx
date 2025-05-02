@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Router>
-        <div className="min-h-screen bg-[#1a0223d5]">
+        <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-[#1a0223]">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/dashboard" element={<Home />} />
