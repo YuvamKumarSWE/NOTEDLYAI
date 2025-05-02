@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import Navbar from '../../components/Navbar';
@@ -16,6 +16,9 @@ const EditNote = () => {
     const [error, setError] = useState("");
     const [formData, setFormData] = useState({ title: "", content: "" });
     const [saving, setSaving] = useState(false);
+    const mediaRecorderRef = useRef(null);
+    const [recording, setRecording] = useState(false);
+    const [audioChunks, setAudioChunks] = useState([]);
 
     const getUserInfo = async () => {
         try {
@@ -80,6 +83,67 @@ const EditNote = () => {
 
     const handleCancel = () => {
         navigate("/dashboard");
+    };
+
+    const handleAudioUpload = async (audioFile) => {
+        const formDataData = new FormData();
+        formDataData.append("file", audioFile);
+
+        toast.info("Uploading and transcribing audio...", { autoClose: 2000 });
+
+        try {
+            const response = await fetch("http://localhost:8000/upload-audio/", {
+                method: "POST",
+                body: formDataData,
+            });
+            const data = await response.json();
+            if (data.notes) {
+                setFormData((prev) => ({
+                    ...prev,
+                    content: prev.content
+                        ? prev.content + "\n\n" + data.notes
+                        : data.notes,
+                }));
+                toast.success("Audio transcribed and notes added!");
+            } else {
+                toast.error("Failed to process audio.");
+            }
+        } catch (error) {
+            toast.error("Failed to upload audio");
+        }
+    };
+
+    const startRecording = async () => {
+        setAudioChunks([]);
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new window.MediaRecorder(stream);
+            mediaRecorderRef.current = mediaRecorder;
+            mediaRecorder.start();
+            setRecording(true);
+
+            mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) {
+                    setAudioChunks((prev) => [...prev, e.data]);
+                }
+            };
+
+            mediaRecorder.onstop = async () => {
+                setRecording(false);
+                const audioBlob = new Blob(audioChunks, { type: "audio/mp3" });
+                await handleAudioUpload(new File([audioBlob], "recording.mp3", { type: "audio/mp3" }));
+                setAudioChunks([]);
+            };
+        } catch (err) {
+            toast.error("Microphone access denied or not available.");
+        }
+    };
+
+    const stopRecording = () => {
+        if (mediaRecorderRef.current) {
+            mediaRecorderRef.current.stop();
+            setRecording(false);
+        }
     };
 
     useEffect(() => {
@@ -148,6 +212,39 @@ const EditNote = () => {
 
                     </div>
                        
+                    </div>
+                    <div className="mb-6">
+                        <label className="block text-gray-300 text-lg mb-2">Upload MP3 to Generate Notes</label>
+                        <input
+                            type="file"
+                            accept="audio/mp3,audio/mpeg"
+                            onChange={e => {
+                                if (e.target.files[0]) {
+                                    handleAudioUpload(e.target.files[0]);
+                                }
+                            }}
+                            className="w-full p-3 rounded-lg bg-gray-800/60 border border-gray-700/50 text-white"
+                        />
+                        <div className="mt-4 flex gap-2">
+                            {!recording ? (
+                                <button
+                                    onClick={startRecording}
+                                    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                                >
+                                    Record & Upload
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={stopRecording}
+                                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                                >
+                                    Stop Recording
+                                </button>
+                            )}
+                            {recording && (
+                                <span className="text-red-400 ml-2 flex items-center">● Recording...</span>
+                            )}
+                        </div>
                     </div>
                     <div className="mb-6">
                         <label className="block text-gray-300 text-lg mb-2">Title</label>
